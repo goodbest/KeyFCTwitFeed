@@ -175,9 +175,6 @@
       $this->tweet_found = true;
       $this->tweet_count++;
 
-      // Format tweet text
-      $tweet_text_raw = $tweet['text'];
-      $tweet_text = $this->autolink($tweet_text_raw);
 
       // Tweet date is in GMT. Convert to UNIX timestamp in the local time of the tweeter.
       $utc_offset = $tweet['user']['utc_offset'];
@@ -211,13 +208,17 @@
         $display_time = strftime($format, $tweet_time);
       }
 
-      $href = 'http://twitter.com/' . $tweet['user']['screen_name'] . '/status/' . $tweet['id_str'];
+	  // Format tweet text
+      $tweet_text_raw = $tweet['text'];
+      
+	  
+	  $href = 'http://twitter.com/' . $tweet['user']['screen_name'] . '/status/' . $tweet['id_str'];
 	  $media_text="";
 	  if(array_key_exists('entities', $tweet)){
 	   	if(array_key_exists('urls', $tweet['entities'])){
 			$urls=$tweet['entities']['urls'];
 			foreach ($urls as $url){
-				$tweet_text=str_replace($url['url'], $url['expanded_url'], $tweet_text);
+				$tweet_text_raw=str_replace($url['url'], $url['expanded_url'], $tweet_text_raw);
 			   
 			}
 			
@@ -238,6 +239,7 @@
 					file_put_contents($img, file_get_contents($media['media_url']));
 				}
 				$media_text=$media_text."<a href=\"".$img."\" target=\"_blank\"><img src=".$img." width=".$media['sizes']['medium']['w']."></a> ";
+				$tweet_text_raw=str_replace($media['url'], '', $tweet_text_raw);
 				#echo $media_text.'<br/>';
 			
 			};
@@ -257,7 +259,7 @@
 	  if (!file_exists($ava)){
 		file_put_contents($ava, file_get_contents($tweet['user']['profile_image_url']));
 	  }
-	  
+	  $tweet_text = $this->autolink($tweet_text_raw);
       return $this->options['tweet_wrap_open'] .'<div class="col-md-1"><img src='.$ava.' width=48 class=\"img-rounded img-responsive\"></div>'. '<div class="col-md-9"> <strong>'.$tweet['user']['name'].'</strong> '. ' <a href="' . $href . '"><small>' . $display_time . '</small></a><br/>' . $tweet_text .'<br/>'. $media_text.'</div>'. $this->options['meta_wrap_open'] . $this->options['meta_wrap_close'] . $this->options['tweet_wrap_close'];
     }
 
