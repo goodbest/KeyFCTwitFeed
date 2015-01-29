@@ -84,5 +84,5 @@ function bing_translate() {
 </script>
 ";
 echo $TweetPHP->get_tweet_list();
-echo "</body></html>"
+echo "</body></html>";
 ?>
