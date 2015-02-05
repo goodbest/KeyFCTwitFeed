@@ -67,9 +67,11 @@ echo '
 
 $ava_dir = 'cache/ava/';
 $avas = array_diff(scandir($ava_dir), array('..', '.'));
+$ava_imgs="<ul class='list-inline'>";
 foreach ($avas as $ava){
-	$ava_imgs=$ava_imgs."<img src=".$ava_dir."/".$ava."> ";
+	$ava_imgs=$ava_imgs."<li><img width=48px src=".$ava_dir."/".$ava."></li>";
 };
+$ava_imgs=$ava_imgs."</ul>";
 		
 echo '<div class="container" role="tabpanel">
     <ul class="nav nav-tabs text-center" role="tablist" id="myTabs">

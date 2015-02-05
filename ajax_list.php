@@ -23,10 +23,10 @@ $TweetPHP = new TweetPHP(array(
   'cachetime'             => 60*5,
   'twitter_wrap_open'     => "<h5 class='text-center'>最后更新: ".date('Y-m-d H:i')."</small></h5>",
   'twitter_wrap_close'    => '',
-  'tweet_wrap_open'       => '<div class="well well-sm"><div class=bs-docs-grid"><div class="row">',
+  'tweet_wrap_open'       => '<div class="well well-sm"><div class=media">',
   'meta_wrap_open'        => '',
   'meta_wrap_close'       => '',
-  'tweet_wrap_close'      => '</div></div></div>',
+  'tweet_wrap_close'      => '</div></div>',
   'error_message'         => 'Oops, our twitter feed is unavailable right now.',
   'error_link_text'       => 'Follow us on Twitter'
 
