@@ -45,7 +45,8 @@
           'consumer_secret'       => '',
           'access_token'          => '',
           'access_token_secret'   => '',
-          'twitter_screen_name'   => '',
+          'twitter_list_owner_screen_name'   => '',
+		  'twitter_list_name'   => '',
           'cache_file'            => dirname(__FILE__) . '/cache/twitter.txt', // Where on the server to save the cached formatted tweets
           'cache_file_raw'        => dirname(__FILE__) . '/cache/twitter-array.txt', // Where on the server to save the cached raw tweets
           'cachetime'             => 60 * 60, // Seconds to cache feed (1 hour).
@@ -120,8 +121,9 @@
 
       // Request Twitter timeline.
       $params = array(
-        'screen_name' => $this->options['twitter_screen_name'],
-        'count' => $this->options['tweets_to_retrieve'],
+        'owner_screen_name' => $this->options['twitter_list_owner_screen_name'],
+		'slug' => $this->options['twitter_list_name'],
+        'count' => $this->options['tweets_to_retrieve']
       );
       if ($this->options['ignore_retweets']) {
         $params['include_rts'] = 'false';
@@ -129,7 +131,7 @@
       if ($this->options['ignore_replies']) {
         $params['exclude_replies'] = 'true';
       }
-      $response_code = $this->tmhOAuth->request('GET', $this->tmhOAuth->url('1.1/statuses/home_timeline.json'), $params);
+      $response_code = $this->tmhOAuth->request('GET', $this->tmhOAuth->url('1.1/lists/statuses.json'), $params);
 
       $this->add_debug_item('tmhOAuth response code: ' . $response_code);
 
@@ -230,10 +232,10 @@
 			foreach ($medias as &$media){
 				
 				if(stripos($media['media_url'], ".png")){
-					$img = 'cache/img_'.$media['id_str'].'.png';
+					$img = 'cache/img/'.$media['id_str'].'.png';
 					}
 				else{
-					$img = 'cache/img_'.$media['id_str'].'.jpg';
+					$img = 'cache/img/'.$media['id_str'].'.jpg';
 				};
 				if (!file_exists($img)){
 					file_put_contents($img, file_get_contents($media['media_url']));
@@ -250,10 +252,10 @@
 	  }
 	  
 	  if(stripos($tweet['user']['profile_image_url'], ".png")){
-					$ava = 'cache/ava_'.$tweet['user']['id_str'].'.png';
+					$ava = 'cache/ava/'.$tweet['user']['id_str'].'.png';
 				}
 		else{
-		$ava = 'cache/ava_'.$tweet['user']['id_str'].'.jpg';
+		$ava = 'cache/ava/'.$tweet['user']['id_str'].'.jpg';
 		};
 				
 	  if (!file_exists($ava)){
