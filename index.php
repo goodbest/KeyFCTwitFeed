@@ -78,6 +78,7 @@ echo '<div class="container" role="tabpanel">
 		<li role="presentation" class="active"><a data-target="#About" data-toggle="tab" role="tab">About</a></li>
         <li role="presentation"><a href="ajax_list.php?type=Key" data-target="#Key_official" data-toggle="tabajax">Key 官方</a></li>
         <li role="presentation"><a href="ajax_list.php?type=Staff" data-target="#Staff" data-toggle="tabajax">Key Staff</a></li>
+		<li role="presentation"><a href="ajax_list.php?type=Rewrite" data-target="#Rewrite" data-toggle="tabajax">Rewrite</a></li>
         <li role="presentation"><a href="ajax_list.php?type=ABCH" data-target="#ABCH" data-toggle="tabajax">AngelBeats & Charlotte</a></li>
 		<li role="presentation"><a href="ajax_list.php?type=KSL" data-target="#KSL" data-toggle="tabajax">Key Sounds Label</a></li>
         <li role="presentation"><a href="ajax_list.php?type=Anime" data-target="#Anime" data-toggle="tabajax">Key 相关动画</a></li>
@@ -107,6 +108,12 @@ echo '<div class="container" role="tabpanel">
 		</div>
 		
         <div role="tabpanel" class="tab-pane" id="Staff">
+		<div class="jumbotron" align="center">
+		<button class="btn btn-lg btn-warning"><span align="center" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> 载入中... </button>
+		</div>
+		</div>
+		
+		<div role="tabpanel" class="tab-pane" id="Rewrite">		
 		<div class="jumbotron" align="center">
 		<button class="btn btn-lg btn-warning"><span align="center" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> 载入中... </button>
 		</div>
@@ -154,7 +161,7 @@ echo '<div class="container" role="tabpanel">
     <a href="//keyfc.net/bbs/"><img src="//keyfc.net/image/logo.jpg" alt="KeyFansClub 我们的梦想" /></a></p>
 <p><strong>
   KEY社作品讨论与同人创作相关的清新主题大众站<br>
-  2002-2015</strong></p>
+  2002-2016</strong></p>
 <p><small>webpage made by: goodbest</small></p>
 </div>
 ';
